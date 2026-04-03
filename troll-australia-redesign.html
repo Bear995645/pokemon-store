@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troll Aus — Trading Cards Australia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ee;
+    --red: #e8321a;
+    --red-dark: #b5200c;
+    --gold: #c9a84c;
+    --gray: #1a1a1a;
+    --gray-mid: #2e2e2e;
+    --gray-light: #3d3d3d;
+    --text-muted: #888;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--red); }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-nav {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-nav-ghost {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-nav-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+  .btn-nav-red {
+    background: var(--red);
+    color: var(--white);
+    transition: background 0.2s;
+  }
+  .btn-nav-red:hover { background: var(--red-dark); }
+
+  /* HERO */
+  .hero {
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 80px 80px;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 32px; height: 1px;
+    background: var(--red);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 9vw, 120px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    margin-bottom: 28px;
+  }
+  .hero-title em {
+    font-style: normal;
+    color: var(--red);
+    display: block;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 400px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+  .btn-outline {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+
+  .hero-stats {
+    margin-top: 56px;
+    display: flex; gap: 40px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,50,26,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,50,26,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-card-stack {
+    position: relative;
+    width: 220px; height: 310px;
+  }
+  .hero-card {
+    position: absolute;
+    width: 200px; height: 280px;
+    border-radius: 12px;
+    background: var(--gray-mid);
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  }
+  .hero-card:nth-child(1) { transform: rotate(-8deg) translate(-30px, 20px); z-index: 1; }
+  .hero-card:nth-child(2) { transform: rotate(-2deg) translate(10px, 0); z-index: 2; }
+  .hero-card:nth-child(3) { transform: rotate(5deg) translate(40px, -15px); z-index: 3; }
+  .card-inner {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    padding: 14px;
+  }
+  .card-badge {
+    font-family: var(--font-mono);
+    font-size: 8px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: white;
+    padding: 3px 7px;
+    border-radius: 2px;
+    display: inline-block;
+    width: fit-content;
+  }
+  .card-img-placeholder {
+    flex: 1;
+    border-radius: 6px;
+    margin: 10px 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 52px;
+  }
+  .card-img-placeholder.fire { background: linear-gradient(135deg, #3d1a00, #6b2d00); }
+  .card-img-placeholder.psychic { background: linear-gradient(135deg, #1a0033, #35006b); }
+  .card-img-placeholder.water { background: linear-gradient(135deg, #001a3d, #003080); }
+  .card-name {
+    font-family: var(--font-display);
+    font-size: 16px; letter-spacing: 0.03em;
+  }
+  .card-price {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 3px;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(232,50,26,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--red);
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex; gap: 0;
+    animation: ticker 22s linear infinite;
+  }
+  .ticker-item {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0 40px;
+    color: rgba(255,255,255,0.9);
+  }
+  .ticker-dot {
+    color: rgba(255,255,255,0.4);
+    margin-right: 40px;
+  }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTION COMMON */
+  section { padding: 100px 80px; }
+  .section-header { margin-bottom: 56px; }
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before {
+    content: ''; display: block;
+    width: 24px; height: 1px; background: var(--red);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  /* CATEGORIES */
+  .categories { background: var(--gray); }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .cat-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-mid);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    aspect-ratio: 4/3;
+    transition: transform 0.3s;
+  }
+  .cat-card:hover { z-index: 2; }
+  .cat-card:hover .cat-overlay { background: rgba(232,50,26,0.6); }
+  .cat-card:hover .cat-arrow { opacity: 1; transform: translate(0, 0); }
+  .cat-pattern {
+    position: absolute; inset: 0;
+    opacity: 0.07;
+  }
+  .cat-pattern.p1 { background: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%) 0/20px 20px; }
+  .cat-pattern.p2 { background: radial-gradient(circle, #fff 1px, transparent 1px) 0/20px 20px; }
+  .cat-pattern.p3 { background: repeating-linear-gradient(-45deg, #fff 0, #fff 1px, transparent 0, transparent 50%) 0/20px 20px; }
+  .cat-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.3);
+    transition: background 0.3s;
+  }
+  .cat-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 28px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  }
+  .cat-emoji { font-size: 28px; margin-bottom: 8px; display: block; }
+  .cat-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    display: block;
+  }
+  .cat-count {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+    display: block;
+  }
+  .cat-arrow {
+    position: absolute; top: 24px; right: 24px;
+    font-size: 20px;
+    opacity: 0;
+    transform: translate(-6px, 6px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .cat-color-1 { background-color: #1a0a00; }
+  .cat-color-2 { background-color: #00091a; }
+  .cat-color-3 { background-color: #080018; }
+  .cat-color-4 { background-color: #001209; }
+  .cat-color-5 { background-color: #1a0012; }
+  .cat-color-6 { background-color: #111100; }
+
+  /* FEATURED CARDS */
+  .featured { background: var(--black); }
+  .cards-scroll {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .product-card {
+    background: var(--gray);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+  .product-card:hover {
+    border-color: rgba(232,50,26,0.4);
+    transform: translateY(-4px);
+  }
+  .product-img {
+    aspect-ratio: 3/4;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 64px;
+    background: var(--gray-mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .product-rarity {
+    position: absolute; top: 12px; right: 12px;
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+  .rarity-secret { background: var(--gold); color: var(--black); }
+  .rarity-holo { background: rgba(255,255,255,0.15); color: white; }
+  .rarity-graded { background: var(--red); color: white; }
+  .product-info { padding: 16px; }
+  .product-set {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .product-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 12px;
+  }
+  .product-footer {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .product-price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--white);
+  }
+  .product-condition {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #4caf7a;
+  }
+  .add-btn {
+    display: block; width: 100%;
+    margin-top: 12px;
+    padding: 9px;
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .add-btn:hover { background: var(--red); border-color: var(--red); }
+
+  /* MYSTERY BOX */
+  .mystery { background: var(--gray); position: relative; overflow: hidden; }
+  .mystery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .mystery-left { position: relative; z-index: 2; }
+  .mystery-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 0.95;
+    margin-bottom: 20px;
+  }
+  .mystery-title em { font-style: normal; color: var(--gold); }
+  .mystery-desc {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 460px;
+  }
+  .mystery-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .tier-card {
+    background: var(--gray-mid);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 16px 14px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    text-decoration: none;
+    display: block;
+  }
+  .tier-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+  .tier-card.featured-tier { border-color: var(--gold); background: rgba(201,168,76,0.08); }
+  .tier-price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--gold);
+  }
+  .tier-label {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .mystery-right {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .mystery-box-visual {
+    width: 260px; height: 260px;
+    background: var(--gray-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    font-size: 80px;
+    position: relative;
+  }
+  .mystery-box-label {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    margin-top: 8px;
+  }
+  .mystery-glow {
+    position: absolute;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* WHY US */
+  .why { background: var(--black); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .why-item {
+    background: var(--black);
+    padding: 40px 32px;
+    transition: background 0.2s;
+  }
+  .why-item:hover { background: var(--gray); }
+  .why-num {
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: rgba(232,50,26,0.2);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+  .why-title {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .why-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* SELL BANNER */
+  .sell-banner {
+    background: var(--red);
+    padding: 80px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+  }
+  .sell-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5vw, 68px);
+    line-height: 1;
+    color: var(--white);
+  }
+  .sell-desc {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 12px;
+    max-width: 500px;
+  }
+  .btn-white {
+    font-family: var(--font-mono);
+    font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    background: var(--white);
+    color: var(--red);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .btn-white:hover { background: #e0ddd8; }
+
+  /* STORY */
+  .story { background: var(--gray); }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .story-year {
+    font-family: var(--font-display);
+    font-size: 120px;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    position: absolute;
+    top: -20px; left: -20px;
+    pointer-events: none;
+  }
+  .story-left { position: relative; }
+  .story-body {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+  .story-body p + p { margin-top: 16px; }
+  .story-address {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .story-contact-row {
+    display: flex; gap: 8px; align-items: baseline;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .story-contact-label {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    min-width: 60px;
+  }
+  .social-row {
+    display: flex; gap: 12px;
+    margin-top: 20px;
+  }
+  .social-btn {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 2px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-btn:hover { border-color: var(--white); color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    background: #060606;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.04em;
+  }
+  .footer-links {
+    display: flex; gap: 24px; list-style: none;
+  }
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.2);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.34s; }
+  .delay-4 { animation-delay: 0.46s; }
+  .delay-5 { animation-delay: 0.58s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 60px 24px; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 24px; }
+    .hero-right { display: none; }
+    .cat-grid { grid-template-columns: 1fr 1fr; }
+    .cards-scroll { grid-template-columns: 1fr 1fr; }
+    .mystery-grid { grid-template-columns: 1fr; }
+    .mystery-right { display: none; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+    .sell-banner { grid-template-columns: 1fr; padding: 40px 24px; }
+    .story-grid { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    .mystery-tiers { grid-template-columns: 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">TROLL<span>.</span>AUS</a>
+  <ul class="nav-links">
+    <li><a href="#categories">Pokemon</a></li>
+    <li><a href="#categories">One Piece</a></li>
+    <li><a href="#mystery">Mystery Box</a></li>
+    <li><a href="#story">Grading</a></li>
+    <li><a href="#sell">Sell / Trade</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-nav btn-nav-ghost">Login</a>
+    <a href="#" class="btn-nav btn-nav-red">Cart (0)</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-eyebrow fade-up">Australia's Premier Card Store</div>
+    <h1 class="hero-title fade-up delay-1">
+      Always<br>
+      <em>Buying.</em>
+      Selling.
+    </h1>
+    <p class="hero-desc fade-up delay-2">Pokemon TCG singles, sealed product, One Piece, PSA graded cards and mystery boxes. Based in Brompton SA — shipping Australia-wide.</p>
+    <div class="hero-ctas fade-up delay-3">
+      <a href="#categories" class="btn-primary">Shop Now</a>
+      <a href="#sell" class="btn-outline">Sell Your Cards</a>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div>
+        <div class="hero-stat-num">10K+</div>
+        <div class="hero-stat-label">Singles Listed</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">2021</div>
+        <div class="hero-stat-label">Est. SA</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">PSA</div>
+        <div class="hero-stat-label">Grading Partner</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-glow"></div>
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-card-stack fade-up delay-2">
+      <div class="hero-card cat-color-2">
+        <div class="card-inner">
+          <span class="card-badge">Holo Rare</span>
+          <div class="card-img-placeholder water">💧</div>
+          <div class="card-name">Lapras GX</div>
+          <div class="card-price">$29.00 AUD</div>
+        </div>
+      </div>
+      <div class="hero-card cat-color-1">
+        <div class="card-inner">
+          <span class="card-badge">Secret Rare</span>
+          <div class="card-img-placeholder fire">🔥</div>
+          <div class="card-name">Charizard VSTAR</div>
+          <div class="card-price">$123.00 AUD</div>
+        </div>
+      </div>
+      <div class="hero-card cat-color-3">
+        <div class="card-inner">
+          <span class="card-badge">PSA 10</span>
+          <div class="card-img-placeholder psychic">🌟</div>
+          <div class="card-name">Mew ex</div>
+          <div class="card-price">$49.50 AUD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Pokemon TCG Singles</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">One Piece Cards</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">PSA Graded Cards</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Booster Boxes & Packs</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Live Breaks</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Sell & Trade</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Mystery Boxes</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Pre-Orders</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Pokemon TCG Singles</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">One Piece Cards</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">PSA Graded Cards</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Booster Boxes & Packs</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Live Breaks</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Sell & Trade</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Mystery Boxes</span><span class="ticker-dot">—</span>
+    <span class="ticker-item">Pre-Orders</span><span class="ticker-dot">—</span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories" class="categories" style="padding: 80px;">
+  <div class="section-header">
+    <div class="section-label">Browse</div>
+    <h2 class="section-title">Shop By Category</h2>
+  </div>
+  <div class="cat-grid">
+    <a href="https://www.trollaustralia.com.au/collections/pokemon-singles" class="cat-card cat-color-1">
+      <div class="cat-pattern p1"></div>
+      <div class="cat-overlay"></div>
+      <span class="cat-arrow">↗</span>
+      <div class="cat-content">
+        <span class="cat-emoji">🔥</span>
+        <span class="cat-name">Pokemon Singles</span>
+        <span class="cat-count">Scarlet & Violet · Sword & Shield · Vintage</span>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/collections/psa-graded-pokemon-cards" class="cat-card cat-color-3">
+      <div class="cat-pattern p2"></div>
+      <div class="cat-overlay"></div>
+      <span class="cat-arrow">↗</span>
+      <div class="cat-content">
+        <span class="cat-emoji">🏆</span>
+        <span class="cat-name">PSA Graded</span>
+        <span class="cat-count">Certified · Slabbed · Investment Grade</span>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/collections/one-piece-singles" class="cat-card cat-color-2">
+      <div class="cat-pattern p3"></div>
+      <div class="cat-overlay"></div>
+      <span class="cat-arrow">↗</span>
+      <div class="cat-content">
+        <span class="cat-emoji">⚔️</span>
+        <span class="cat-name">One Piece</span>
+        <span class="cat-count">Singles · Sealed · Graded</span>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/collections/pokemon-booster-boxes" class="cat-card cat-color-4">
+      <div class="cat-pattern p1"></div>
+      <div class="cat-overlay"></div>
+      <span class="cat-arrow">↗</span>
+      <div class="cat-content">
+        <span class="cat-emoji">📦</span>
+        <span class="cat-name">Sealed Product</span>
+        <span class="cat-count">Booster Boxes · ETBs · Packs</span>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/collections/japanese-pokemon-singles" class="cat-card cat-color-5">
+      <div class="cat-pattern p2"></div>
+      <div class="cat-overlay"></div>
+      <span class="cat-arrow">↗</span>
+      <div class="cat-content">
+        <span class="cat-emoji">🌸</span>
+        <span class="cat-name">Japanese Singles</span>
+        <span class="cat-count">Art Rares · Special Sets</span>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/collections/accessories" class="cat-card cat-color-6">
+      <div class="cat-pattern p3"></div>
+      <div class="cat-overlay"></div>
+      <span class="cat-arrow">↗</span>
+      <div class="cat-content">
+        <span class="cat-emoji">🛡️</span>
+        <span class="cat-name">Accessories</span>
+        <span class="cat-count">Sleeves · Binders · Protection</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURED SINGLES -->
+<section id="featured" class="featured">
+  <div class="section-header" style="display:flex;justify-content:space-between;align-items:flex-end;">
+    <div>
+      <div class="section-label">Hot Right Now</div>
+      <h2 class="section-title">Featured Singles</h2>
+    </div>
+    <a href="https://www.trollaustralia.com.au/collections/pokemon-singles" class="btn-outline" style="margin-bottom:8px;">View All →</a>
+  </div>
+  <div class="cards-scroll">
+    <a href="https://www.trollaustralia.com.au/products/charizard-vstar-swsh262-sword-shield-black-star-promos" class="product-card">
+      <div class="product-img cat-color-1">
+        🔥
+        <span class="product-rarity rarity-secret">Secret Rare</span>
+      </div>
+      <div class="product-info">
+        <div class="product-set">Sword & Shield: Black Star Promos</div>
+        <div class="product-name">Charizard VSTAR (SWSH262)</div>
+        <div class="product-footer">
+          <div class="product-price">$123</div>
+          <div class="product-condition">Near Mint</div>
+        </div>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/products/pikachu-tg05-tg30-sword-shield-lost-origin" class="product-card">
+      <div class="product-img" style="background:#1a1500;">
+        ⚡
+        <span class="product-rarity rarity-holo">Trainer Gallery</span>
+      </div>
+      <div class="product-info">
+        <div class="product-set">Sword & Shield: Lost Origin</div>
+        <div class="product-name">Pikachu (TG05/TG30)</div>
+        <div class="product-footer">
+          <div class="product-price">$65</div>
+          <div class="product-condition">Near Mint</div>
+        </div>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/products/mew-gg10-gg70-sword-shield-crown-zenith" class="product-card">
+      <div class="product-img cat-color-3">
+        🌟
+        <span class="product-rarity rarity-holo">Galarian Gallery</span>
+      </div>
+      <div class="product-info">
+        <div class="product-set">Crown Zenith</div>
+        <div class="product-name">Mew (GG10/GG70)</div>
+        <div class="product-footer">
+          <div class="product-price">$108</div>
+          <div class="product-condition">Near Mint</div>
+        </div>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </a>
+    <a href="https://www.trollaustralia.com.au/products/gengar-vmax-157-264-sword-shield-fusion-strike" class="product-card">
+      <div class="product-img" style="background:#0d001a;">
+        👻
+        <span class="product-rarity rarity-secret">VMAX</span>
+      </div>
+      <div class="product-info">
+        <div class="product-set">Fusion Strike</div>
+        <div class="product-name">Gengar VMAX (157/264)</div>
+        <div class="product-footer">
+          <div class="product-price">$82</div>
+          <div class="product-condition">Near Mint</div>
+        </div>
+        <button class="add-btn">Add to Cart</button>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- MYSTERY BOX -->
+<section id="mystery" class="mystery">
+  <div class="mystery-grid">
+    <div class="mystery-left">
+      <div class="section-label">Chase The Ace</div>
+      <h2 class="mystery-title">Mystery<br><em>Boxes.</em></h2>
+      <p class="mystery-desc">Six tiers of curated Pokemon collectibles. Every box is packed by our team with a guaranteed value and a chance at something extraordinary.</p>
+      <div class="mystery-tiers">
+        <a href="https://www.trollaustralia.com.au/products/chase-the-ace-mystery-box-1" class="tier-card">
+          <div class="tier-price">$50</div>
+          <div class="tier-label">Starter</div>
+        </a>
+        <a href="https://www.trollaustralia.com.au/products/chase-the-ace-mystery-box-tier-100" class="tier-card">
+          <div class="tier-price">$100</div>
+          <div class="tier-label">Collector</div>
+        </a>
+        <a href="https://www.trollaustralia.com.au/products/chase-the-ace-mystery-box-tier-500" class="tier-card featured-tier">
+          <div class="tier-price">$500</div>
+          <div class="tier-label">Popular</div>
+        </a>
+        <a href="https://www.trollaustralia.com.au/products/chase-the-ace-mystery-box-tier-1000" class="tier-card">
+          <div class="tier-price">$1K</div>
+          <div class="tier-label">Elite</div>
+        </a>
+        <a href="https://www.trollaustralia.com.au/products/chase-the-ace-mystery-box-tier-2500" class="tier-card">
+          <div class="tier-price">$2.5K</div>
+          <div class="tier-label">Premium</div>
+        </a>
+        <a href="https://www.trollaustralia.com.au/products/chase-the-ace-mystery-box-tier-5000" class="tier-card">
+          <div class="tier-price">$5K</div>
+          <div class="tier-label">Ultra</div>
+        </a>
+      </div>
+      <a href="https://www.trollaustralia.com.au/collections/live-breaks" class="btn-primary">Shop All Mystery Boxes</a>
+    </div>
+    <div class="mystery-right">
+      <div class="mystery-glow"></div>
+      <div class="mystery-box-visual">
+        🎁
+        <div class="mystery-box-label">CHASE THE ACE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why">
+  <div class="section-header">
+    <div class="section-label">Why Troll Aus</div>
+    <h2 class="section-title">The Troll Standard</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div class="why-title">Collectors First</div>
+      <div class="why-desc">Founded by collectors in 2021. We know what matters — condition, authenticity, value.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div class="why-title">Troll & Toad Partner</div>
+      <div class="why-desc">Exclusive Australian partner of Troll and Toad. Competitive prices on thousands of singles.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div class="why-title">PSA Grading Service</div>
+      <div class="why-desc">Send your cards through us. We handle the PSA submission process end to end.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div class="why-title">Ships Australia-Wide</div>
+      <div class="why-desc">Secure packaging. Fast dispatch from Brompton, SA. Every order tracked.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SELL BANNER -->
+<div id="sell" class="sell-banner">
+  <div>
+    <h2 class="sell-title">Got Cards<br>To Sell?</h2>
+    <p class="sell-desc">We're always buying. Singles, collections, bulk — get a quote through our buylist and we'll make you an offer.</p>
+  </div>
+  <a href="https://trollaustraliabuylist.com.au/" class="btn-white">Visit Our Buylist →</a>
+</div>
+
+<!-- STORY -->
+<section id="story" class="story">
+  <div class="story-grid">
+    <div class="story-left">
+      <div class="section-label">Our Story</div>
+      <h2 class="section-title" style="margin-bottom:32px;">Born From<br>The Hobby</h2>
+      <div class="story-body">
+        <p>In September 2021, Troll Aus Pty Ltd was born out of a shared passion for all things Pokémon. As collectors ourselves, we understood the desire for high-quality, affordable Pokémon TCG products in Australia.</p>
+        <p>This drive led us to become the exclusive Australian partner of Troll and Toad, allowing us to offer competitive prices and unique opportunities to our customers.</p>
+        <p>We're not just a business — we're fellow collectors who know the excitement of pulling a rare card or completing a set.</p>
+      </div>
+      <div class="story-address">
+        <div class="story-contact-row">
+          <span class="story-contact-label">Address</span>
+          <span>87 Torrens Rd, Brompton SA 5007</span>
+        </div>
+        <div class="story-contact-row">
+          <span class="story-contact-label">Phone</span>
+          <a href="tel:0493475335" style="color:var(--text-muted);text-decoration:none;">0493 475 335</a>
+        </div>
+        <div class="story-contact-row">
+          <span class="story-contact-label">Email</span>
+          <a href="mailto:admin@trollaustralia.com.au" style="color:var(--red);text-decoration:none;">admin@trollaustralia.com.au</a>
+        </div>
+        <div class="social-row">
+          <a href="https://www.facebook.com/gottacatchemallcollectibles" class="social-btn">Facebook</a>
+          <a href="https://www.instagram.com/troll.aus" class="social-btn">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Also At</div>
+      <h3 style="font-family:var(--font-display);font-size:36px;margin-bottom:16px;line-height:1;">Melbourne<br>Store</h3>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:24px;">Now open in Melbourne — same Troll Aus quality in Victoria. Visit us online at trollaustraliamelb.com.au</p>
+      <a href="https://www.trollaustraliamelb.com.au" class="btn-outline">Melbourne Store →</a>
+      <div style="margin-top:48px;">
+        <div class="section-label">Pre-Orders</div>
+        <h3 style="font-family:var(--font-display);font-size:36px;margin-bottom:16px;line-height:1;">Upcoming<br>Releases</h3>
+        <p style="color:var(--text-muted);font-size:14px;line-height:1.7;margin-bottom:24px;">Lock in the latest sets before they sell out. Pre-order now for guaranteed allocation on new Pokemon and One Piece releases.</p>
+        <a href="https://www.trollaustralia.com.au/collections/pre-orders" class="btn-primary">See Pre-Orders</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">TROLL AUS PTY LTD</div>
+  <ul class="footer-links">
+    <li><a href="https://www.trollaustralia.com.au/pages/terms-of-service">Terms</a></li>
+    <li><a href="https://www.trollaustralia.com.au/pages/refund-policy">Refunds</a></li>
+    <li><a href="https://www.trollaustralia.com.au/pages/copy-of-events">FAQ</a></li>
+    <li><a href="https://www.trollaustralia.com.au/products/troll-aus-gift-card">Gift Cards</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Troll Aus Pty Ltd</div>
+</footer>
+
+</body>
+</html>
